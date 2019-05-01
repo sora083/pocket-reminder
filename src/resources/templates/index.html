@@ -1,0 +1,13 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>index page</title>
+</head>
+<body>
+<h3>Get list</h3>
+<form action="#" th:action="@{/get}" th:object="${retrieveForm}"  method="get">
+    <p>Token: <input type="text" th:field="*{token}" /></p>
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>
