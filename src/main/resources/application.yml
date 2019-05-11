@@ -18,3 +18,9 @@ management:
     web:
       exposure:
         include: '*'
+---
+
+spring:
+  profiles: heroku
+pocket:
+  pocket-url: https://powerful-brook-29776.herokuapp.com/index
