@@ -6,10 +6,15 @@ server:
   port: 8080
 
 pocket:
-  consumer-key: 
+  consumer-key: ${CONSUMER_KEY}
   get-url: https://getpocket.com/v3/get
   token-url: https://getpocket.com/v3/oauth/request
   redirect-url: https://getpocket.com/auth/authorize
   auth-url: https://getpocket.com/v3/oauth/authorize
   pocket-url: http://localhost:8080/index
-  
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

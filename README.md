@@ -1,6 +1,17 @@
 ### APIs
+##### Get token(Please access via browser)
+```
 http://localhost:8080/init
+```
+
 http://localhost:8080/get?token=${access_token}
+
+### Deploy to heroku
+```bash
+heroku login
+heroku create
+git push heroku master
+```
 
 ### 調べる
 * auth0

@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RequiredArgsConstructor
 public class AuthController {
 
-  private final AuthenticationService authenticationService;
+    private final AuthenticationService authenticationService;
 
-  @GetMapping("/init")
-  public String initialize() {
-    return authenticationService.initialize();
-  }
+    @GetMapping("/init")
+    public String initialize() {
+        return authenticationService.initialize();
+    }
 }
