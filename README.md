@@ -13,6 +13,11 @@ heroku create
 git push heroku master
 ```
 
+#### access via browser
+```
+https://pocket-reminder.herokuapp.com/init
+```
+
 ### 調べる
 * auth0
 
