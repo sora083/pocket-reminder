@@ -23,4 +23,4 @@ management:
 spring:
   profiles: heroku
 pocket:
-  pocket-url: https://pocket-reminder/index
+  pocket-url: https://pocket-reminder.herokuapp.com/index
