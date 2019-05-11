@@ -1,1 +1,1 @@
-web: java -jar target/pocket-reminder-0.0.1.jar
+web: java -jar target/pocket-reminder-0.0.1.jar --server.port=${PORT}
