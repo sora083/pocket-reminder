@@ -22,13 +22,13 @@ public class AuthenticationService {
         //String consumerKey = System.getenv("POCKET_CONSUMER_KEY");
         String consumerKey = apiConfig.getConsumerKey();
         String getTokenUrl = UriComponentsBuilder.fromUriString(apiConfig.getTokenUrl()).toUriString();
-        log.info("getTokenUrl: {}", getTokenUrl);
+        log.debug("getTokenUrl: {}", getTokenUrl);
         TokenRequest tokenRequest = new TokenRequest(consumerKey, apiConfig.getPocketUrl());
 
         String results = restTemplate.postForObject(getTokenUrl, tokenRequest, String.class);
         String[] args = results.split("=");
         String token = args[1];
-        log.info("token: {}", token);
+        log.debug("token: {}", token);
 
         // redirect
         String redirectUrl =
@@ -36,7 +36,7 @@ public class AuthenticationService {
                         .queryParam("request_token", token)
                         .queryParam("redirect_uri", apiConfig.getPocketUrl() + "?token=" + token)
                         .toUriString();
-        log.info("redirectUrl: {}", redirectUrl);
+        log.debug("redirectUrl: {}", redirectUrl);
         return "redirect:" + redirectUrl;
     }
 }

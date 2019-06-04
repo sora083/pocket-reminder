@@ -23,6 +23,7 @@ public class PocketReminderService {
 
     public Retrieve fetch(String accessToken) {
         String fetchUrl = createRequestUrl(accessToken);
+        log.info("fetchUrl: {}", fetchUrl);
         String results = restTemplate.getForObject(fetchUrl, String.class);
         Retrieve response = null;
         try {
@@ -53,6 +54,7 @@ public class PocketReminderService {
         String authorizeUrl = UriComponentsBuilder.fromUriString(apiConfig.getAuthUrl()).toUriString();
         log.info("authorizeUrl: {}", authorizeUrl);
         AuthorizeRequest authorizeRequest = new AuthorizeRequest(consumerKey, token);
+        log.debug("authorizeRequest: {}", authorizeRequest.toString());
 
         String response = restTemplate.postForObject(authorizeUrl, authorizeRequest, String.class);
         String[] res = response.split("&");

@@ -1,8 +1,10 @@
 package com.sora.pocket.reminder.controller;
 
+import com.sora.pocket.reminder.config.ApiConfig;
 import com.sora.pocket.reminder.entity.Item;
 import com.sora.pocket.reminder.entity.Retrieve;
 import com.sora.pocket.reminder.form.RetrieveForm;
+import com.sora.pocket.reminder.service.AuthRepository;
 import com.sora.pocket.reminder.service.PocketReminderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,11 @@ import java.util.stream.Collectors;
 public class PocketReminderController {
 
     private final PocketReminderService pocketReminderService;
+    private final AuthRepository authRepository;
+    private final ApiConfig apiConfig;
+
+//    @Value("${pocket.consumer-key}")
+//    private String key:
 
     @GetMapping("/index")
     public String index(Model model, @RequestParam String token) {
@@ -32,11 +39,20 @@ public class PocketReminderController {
 
     @GetMapping("/get")
     public String getList(Model model, @Validated @ModelAttribute RetrieveForm form) {
-        String accessToken = pocketReminderService.auth(form.getToken());
+        String accessToken = getAccessToken(apiConfig.getConsumerKey(), form.getToken());
         log.info("accessToken: {}", accessToken);
         Retrieve retrieve = pocketReminderService.fetch(accessToken);
         List<Item> items = retrieve.getList().entrySet().stream().map(Entry::getValue).collect(Collectors.toList());
         model.addAttribute("items", items);
         return "list";
+    }
+
+    private String getAccessToken(String key, String token) {
+        String accessToken = authRepository.fineOne(key);
+        if (accessToken == null) {
+            accessToken = pocketReminderService.auth(token);
+            authRepository.insert(key, accessToken);
+        }
+        return accessToken;
     }
 }
